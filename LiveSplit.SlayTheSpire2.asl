@@ -100,7 +100,7 @@ split
 	if (old.Line == l || l == null) return;
 
     // Split for boss kills.
-    string boss = vars.TryMatch(l, "CHARACTER.* has won against encounter ENCOUNTER.*_BOSS");
+    string boss = vars.TryMatch(l, "(CHARACTER.* has won against encounter ENCOUNTER.*_BOSS|CHARACTER.* fought ENCOUNTER.*_BOSS for the first time and WON)");
     if (boss != null)
     {
         return settings["bosses"];
