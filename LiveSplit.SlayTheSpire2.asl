@@ -113,7 +113,7 @@ reset
 	
 	if (old.Line == l || l == null) return;
 
-	if (l.Contains("Abandoning an in-progress run (player-initiated)") || l.Contains("has lost to encounter") || l.Contains("Abandoning run from main menu")){
+	if (l.Contains("Abandoning an in-progress run (player-initiated)") || l.Contains("has lost to encounter") || l.Contains("Abandoning run from main menu") || l.Contains("CHARACTER.* fought MONSTER.* for the first time and LOST")){
 		vars.HasKilledBoss = false;
         return settings["resetDeath"];
     }
