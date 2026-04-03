@@ -25,6 +25,17 @@ startup
         { null, "resetDeath",   "Reset on deaths/abandons", true },
 		{ null, "resetClose",   "Reset when game closes", false },
         { null, "bosses",       "Split when defeating a boss", true },
+            { "bosses", "VANTOM_BOSS",              "Vantom", true },
+            { "bosses", "CEREMONIAL_BEAST_BOSS",    "Ceremonial Beast", true },
+            { "bosses", "THE_KIN_BOSS",             "The Kin", true },
+            { "bosses", "SOUL_FYSH_BOSS",           "Soul Fysh", true },
+            { "bosses", "LAGAVULIN_MATRIARCH_BOSS", "Lagavulin Matriarch", true },
+            { "bosses", "THE_INSATIABLE_BOSS",      "The Insatiable", true },
+            { "bosses", "KNOWLEDGE_DEMON_BOSS",     "Knowledge Demon", true },
+            { "bosses", "KAISER_CRAB_BOSS",         "Kaiser Crab", true },
+            { "bosses", "DOORMAKER_BOSS",           "Doormaker", true },
+            { "bosses", "TEST_SUBJECT_BOSS",        "Test Subject", true },
+            { "bosses", "QUEEN_BOSS",               "Queen", true },
 
 
         // { null, "splitLvlChange",   "Split on ascension progression",                                  false },
@@ -65,7 +76,8 @@ init
 update
 {
 	
-	if (vars.Reader == null){
+	if (vars.Reader == null)
+    {
         return false;
 	}
 	
@@ -100,10 +112,10 @@ split
 	if (old.Line == l || l == null) return;
 
     // Split for boss kills.
-    string boss = vars.TryMatch(l, "(CHARACTER.* has won against encounter ENCOUNTER.*_BOSS|CHARACTER.* fought ENCOUNTER.*_BOSS for the first time and WON)");
+    string boss = vars.TryMatch(l, "CHARACTER\\..* has won against encounter ENCOUNTER\\.(.*)_BOSS") ?? vars.TryMatch(l, "CHARACTER\\..* fought ENCOUNTER\\.(.*)_BOSS for the first time and WON");
     if (boss != null)
     {
-        return settings["bosses"];
+        return settings[boss + "_BOSS"] ?? false;  
     }
 }
 
@@ -113,7 +125,8 @@ reset
 	
 	if (old.Line == l || l == null) return;
 
-	if (l.Contains("Abandoning an in-progress run (player-initiated)") || l.Contains("has lost to encounter") || l.Contains("Abandoning run from main menu") || l.Contains("for the first time and LOST")){
+	if (l.Contains("Abandoning an in-progress run (player-initiated)") || l.Contains("has lost to encounter") || l.Contains("Abandoning run from main menu") || l.Contains("for the first time and LOST"))
+    {
 		vars.HasKilledBoss = false;
         return settings["resetDeath"];
     }
@@ -121,7 +134,8 @@ reset
 
 exit
 {
-    if (settings["resetClose"]){
+    if (settings["resetClose"])
+    {
 		vars.Reader.Close();
 	}
 }
