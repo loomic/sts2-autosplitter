@@ -2,7 +2,10 @@
 
 Slay the Spire 2 Auto Splitter that reads from the `godot.log` file. I adapted [Oohbleh's Slay the Spire 1 auto splitter](https://github.com/OohBleh/Spire-speedruns-and-other-stuff/blob/main/autosplitters/broken/LiveSplit.SlayTheSpire2.asl) for this.
 
-## Setup
+## Automatic Setup
+In your splits editor, with "Slay the Spire 2" selected as your game, hit "Activate" in order to enable the autosplitter.
+
+## Manual Setup
 
 1. Download `LiveSplit.SlayTheSpire2.asl` and save it somewhere.
 2. Open up your LiveSplit, right-click it, and hit Edit Layout...
